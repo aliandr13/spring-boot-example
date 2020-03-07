@@ -1,0 +1,12 @@
+package by.it.academy.spring.boot.example.repository;
+
+import by.it.academy.spring.boot.example.model.Product;
+import org.springframework.data.repository.CrudRepository;
+
+import java.util.List;
+
+public interface ProductRepository extends CrudRepository<Product, Long> {
+
+    List<Product> findAll();
+
+}
