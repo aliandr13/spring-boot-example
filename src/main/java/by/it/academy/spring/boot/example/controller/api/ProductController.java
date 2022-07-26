@@ -1,9 +1,11 @@
 package by.it.academy.spring.boot.example.controller.api;
 
 import by.it.academy.spring.boot.example.model.Product;
+import by.it.academy.spring.boot.example.model.dto.CreateProductDTO;
 import by.it.academy.spring.boot.example.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/api/products")
+@RequestMapping(value = "/api/products", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProductController {
 
     @Autowired
@@ -35,10 +37,10 @@ public class ProductController {
         productService.deleteProduct(id);
     }
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public void createProduct(@RequestBody Product product) {
-        productService.createProduct(product);
+    public Product createProduct(@RequestBody CreateProductDTO product) {
+         return productService.createProduct(product);
     }
 
     @PutMapping

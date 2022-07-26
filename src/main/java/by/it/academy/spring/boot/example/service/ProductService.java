@@ -1,6 +1,7 @@
 package by.it.academy.spring.boot.example.service;
 
 import by.it.academy.spring.boot.example.model.Product;
+import by.it.academy.spring.boot.example.model.dto.CreateProductDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +14,7 @@ public interface ProductService {
 
     void deleteProduct(Long id);
 
-    Product createProduct(Product product);
+    Product createProduct(CreateProductDTO product);
 
     Product updateProduct(Product product);
 
