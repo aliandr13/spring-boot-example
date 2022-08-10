@@ -40,7 +40,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product createProduct(CreateProductDTO productDTO) {
         Product product1 = Product.builder()
-                .manufacturer(productDTO.getManufacturer())
+                .model(productDTO.getModel())
                 .price(productDTO.getPrice())
                 .manufacturer(productDTO.getManufacturer()).build();
         return repository.save(product1);
