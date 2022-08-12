@@ -1,5 +1,6 @@
 package by.it.academy.spring.boot.example.repository;
 
+import by.it.academy.spring.boot.example.model.Manufacturer;
 import by.it.academy.spring.boot.example.model.Product;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,5 +16,7 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     @Modifying
     @Query(value = "delete from Product p  where p.id = :productId", nativeQuery = false)
     void deleteById(@Param("productId") Long productId);
+
+    List<Product> getProductsByManufacturer(Manufacturer manufacturer);
 
 }

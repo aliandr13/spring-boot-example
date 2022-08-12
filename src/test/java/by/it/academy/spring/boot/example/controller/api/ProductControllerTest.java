@@ -1,5 +1,6 @@
 package by.it.academy.spring.boot.example.controller.api;
 
+import by.it.academy.spring.boot.example.model.Manufacturer;
 import by.it.academy.spring.boot.example.model.Product;
 import by.it.academy.spring.boot.example.repository.ProductRepository;
 import org.junit.Before;
@@ -43,7 +44,7 @@ public class ProductControllerTest {
     public void setUp() throws Exception {
         Product product = Product.builder()
                 .id(ID.longValue())
-                .manufacturer(MANUFACTURER)
+                .manufacturer(Manufacturer.builder().id(1L).build())
                 .model(MODEL)
                 .price(PRICE).build();
         when(productRepository.findById(ID.longValue())).thenReturn(Optional.of(product));

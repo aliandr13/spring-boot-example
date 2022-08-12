@@ -1,11 +1,11 @@
 package by.it.academy.spring.boot.example.service.impl;
 
+import by.it.academy.spring.boot.example.model.Manufacturer;
 import by.it.academy.spring.boot.example.model.Product;
 import by.it.academy.spring.boot.example.model.dto.CreateProductDTO;
 import by.it.academy.spring.boot.example.repository.ProductRepository;
 import by.it.academy.spring.boot.example.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,13 +17,21 @@ import java.util.Optional;
 @Transactional
 public class ProductServiceImpl implements ProductService {
 
-    @Autowired
-    private ProductRepository repository;
+    private final ProductRepository repository;
+
+    public ProductServiceImpl(ProductRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     @Transactional(readOnly = true)
     public List<Product> getAllProducts() {
         return repository.findAll();
+    }
+
+    @Override
+    public List<Product> getProductsByManufacturer(Long manufacturerId) {
+        return repository.getProductsByManufacturer(Manufacturer.builder().id(manufacturerId).build());
     }
 
     @Override
@@ -42,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
         Product product1 = Product.builder()
                 .model(productDTO.getModel())
                 .price(productDTO.getPrice())
-                .manufacturer(productDTO.getManufacturer()).build();
+                .manufacturer(Manufacturer.builder().id(productDTO.getManufacturer()).build()).build();
         return repository.save(product1);
     }
 
