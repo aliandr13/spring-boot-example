@@ -17,12 +17,22 @@ public class WelcomeController {
     @Value("${welcome.message}")
     private String message;
 
+    @Value("${application.name}")
+    private String applicationName;
+
+    @Value("${build.version}")
+    private String buildVersion;
+
+    @Value("${build.timestamp}")
+    private String buildTimestamp;
+
     private List<String> tasks = Arrays.asList("a", "b", "c", "d", "e", "f", "g");
 
     @GetMapping("/")
     public String main(Model model) {
         model.addAttribute("message", message);
         model.addAttribute("tasks", tasks);
+        model.addAttribute("appversion", buildVersion);
 
         return "welcome"; //view
     }
@@ -31,7 +41,7 @@ public class WelcomeController {
     @GetMapping("/hello")
     public String mainWithParam(
             @RequestParam(name = "name", required = false, defaultValue = "")
-                    String name, Model model) {
+            String name, Model model) {
 
         model.addAttribute("message", name);
 
