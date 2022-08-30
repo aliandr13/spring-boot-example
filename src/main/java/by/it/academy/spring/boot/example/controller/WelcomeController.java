@@ -23,13 +23,16 @@ public class WelcomeController {
     @Value("${build.version}")
     private String buildVersion;
 
+    @Value("${git.commit.id.abbrev}")
+    private String commitId;
+
     private final List<String> tasks = List.of("a", "b", "c", "d", "e", "f", "g");
 
     @GetMapping("/")
     public String main(Model model) {
         model.addAttribute("message", message);
         model.addAttribute("tasks", tasks);
-        model.addAttribute("appversion", buildVersion);
+        model.addAttribute("appversion", buildVersion + "-" + commitId);
 
         return "welcome"; //view
     }
