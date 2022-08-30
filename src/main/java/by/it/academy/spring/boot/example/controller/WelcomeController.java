@@ -23,10 +23,7 @@ public class WelcomeController {
     @Value("${build.version}")
     private String buildVersion;
 
-    @Value("${build.timestamp}")
-    private String buildTimestamp;
-
-    private List<String> tasks = Arrays.asList("a", "b", "c", "d", "e", "f", "g");
+    private final List<String> tasks = List.of("a", "b", "c", "d", "e", "f", "g");
 
     @GetMapping("/")
     public String main(Model model) {
